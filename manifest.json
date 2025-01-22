@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Renomeador de Abas",
+    "version": "1.0",
+    "description": "Renomeia automaticamente as abas do Chrome com base no seu nome original.",
+    "permissions": [
+      "tabs"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "host_permissions": [
+      "http://*/*",
+      "https://*/*"
+    ]
+  }
+  
