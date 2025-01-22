@@ -1,13 +1,17 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "renameTab") {
-    // Obtém a aba ativa e injeta um script nela para alterar o título
+    // Armazena o novo título no chrome.storage
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const activeTab = tabs[0];
       if (activeTab) {
-        chrome.scripting.executeScript({
-          target: { tabId: activeTab.id },
-          func: changeTitle,
-          args: [request.newTitle]
+        // Salva o novo título no chrome.storage
+        chrome.storage.local.set({ [activeTab.id]: request.newTitle }, () => {
+          // Aplica o título imediatamente
+          chrome.scripting.executeScript({
+            target: { tabId: activeTab.id },
+            func: changeTitle,
+            args: [request.newTitle]
+          });
         });
       }
     });

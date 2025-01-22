@@ -5,6 +5,7 @@
   "description": "Renomeia abas do Chrome com o nome escolhido pelo usuário.",
   "permissions": [
     "tabs",
+    "storage",
     "scripting"
   ],
   "background": {
@@ -16,5 +17,11 @@
   "host_permissions": [
     "http://*/*",
     "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
   ]
 }
